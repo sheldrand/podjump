@@ -11,7 +11,7 @@ config = {
     'author_email': 'bmckinley@groupon.com',
     'version': '0.1',
     'install_requires': ['nose'],
-    'packages': ['NAME'],
+    'packages': ['podJump'],
     'scripts': [],
     'name': 'podJump'
 }
