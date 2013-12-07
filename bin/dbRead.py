@@ -14,6 +14,7 @@ def getRows (cur, location):
 	return rows	
 
 def nameToID (cur, name):
+#Takes in a system name and returns the system's ID number
 	sql = "SELECT solarSystemID from mapSolarSystems where solarSystemName LIKE '" + name + "%'"
 	cur.execute(sql)
 	sID = cur.fetchone()
