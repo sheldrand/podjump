@@ -99,6 +99,7 @@ with con:
 	map = buildMap(cur)
 
 	start = raw_input("Where would you like to go? > ")
+	school = raw_input("What school are you in > ")
 	#end = raw_input("where are you going > ")
 	
 	
@@ -110,10 +111,10 @@ with con:
 	
 	
 	offices = readFile()
-	schools = schoolStations(cur, "science and trade") #hard coding in a school for now
+	schools = schoolStations(cur, school) 
 	for i in schools:
 		offices.append(i)
-	clone = [] #This will be the sorted list how to sort it I'm not sure yet.
+	clone = [] #Sorted list.
 	for place in offices:
 		if checkMed(cur, place):
 			distance = shortestPath(cur, map, start, place)
