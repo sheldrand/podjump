@@ -8,9 +8,9 @@ config = {
     'author': 'Sheld Rand',
     'url': '',
     'download_url': 'github.com/sheldrand/podJump',
-    'author_email': 'bmckinley@groupon.com',
+    'author_email': 'joyfulflyer@gmail.com',
     'version': '0.1',
-    'install_requires': ['nose'],
+    'install_requires': ['nose', 'networkx'],
     'packages': ['podJump'],
     'scripts': [],
     'name': 'podJump'
