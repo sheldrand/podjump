@@ -116,7 +116,11 @@ with con:
 	clone = [] #This will be the sorted list how to sort it I'm not sure yet.
 	for place in offices:
 		if checkMed(cur, place):
-			print "and is %s Jumps from your destination \n" % shortestPath(cur, map, start, place)
+			distance = shortestPath(cur, map, start, place)
+			clone.append((place, distance))
+			print "and is %s Jumps from your destination \n" % distance
 		else:
 			pass
+	clone.sort(key=lambda tup: tup[1])
+	print clone
 print "end"
