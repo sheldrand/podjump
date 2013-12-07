@@ -1,12 +1,9 @@
-#!/usr/bin/python
+﻿#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 import MySQLdb as mdb
 import sys
 import networkx as nx
-
-
-
 
 def getRows (cur, location):
 	sql = "SELECT mapSolarSystemJumps.toSolarSystemID FROM mapSolarSystemJumps INNER JOIN " + \
@@ -50,14 +47,35 @@ def shortestPath (con, map, start, end):
 		
 def checkMed (cur, station): #Returns true if a given station has cloning services returning true all the time right now
 	return TRUE	
-	
+
+def readFile():
+	filename = raw_input("The name of your office file > ")
+	corpOffices = open('sta')
+	line = corpOffices.readline()
+	offices = []
+	while line != '':
+		index = line.find(' ')
+		offices.append(line[:index])
+		line = corpOffices.readline()
+	print len(offices)
+	return offices
+
+
+
+		
 con = mdb.connect('localhost', 'databaseHandler', 'test123', 'evedb');
 with con:
 	c = con.cursor()
 	map = buildMap(c)
 
 start = raw_input("Where are you? > ")
-end = raw_input("where are you going > ")
+#end = raw_input("where are you going > ")
 
+offices = readFile()
+i = 1
+for place in offices:
+	print "there have been %r" % i
+	i += 1
+	print shortestPath(con, map, start, place)
 print shortestPath(con, map, start, end)
 print "end"
