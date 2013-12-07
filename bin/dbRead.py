@@ -70,7 +70,7 @@ def readFile():
 	offices = []
 	count = 0
 	while line != '':
-		index = line.find(' -')
+		index = line.rfind(' -')
 		if index > 0:
 			offices.append(line[:index])
 		else:
@@ -79,6 +79,18 @@ def readFile():
 	print len(offices)
 	return offices
 
+def schoolStations(cur, school):
+#returns a list of stations with cloning owned by that school.
+#Note: does not error check assumes school is picked from pre-populated list
+	sql = "SELECT staStations.stationName FROM staStations INNER JOIN invNames ON staStations.corporationID=invNames.itemID " + \
+	"WHERE invNames.itemName LIKE '" + school + "%';"
+
+	cur.execute(sql)
+	stations = cur.fetchall() #Gets the dump of all station names
+	stationNames = []
+	for pieces in stations: #Converts to a list of strings
+		stationNames.append(pieces[0])
+	return stationNames
 
 		
 con = mdb.connect('localhost', 'databaseHandler', 'test123', 'evedb');
@@ -98,6 +110,9 @@ with con:
 	
 	
 	offices = readFile()
+	schools = schoolStations(cur, "science and trade") #hard coding in a school for now
+	for i in schools:
+		offices.append(i)
 	clone = [] #This will be the sorted list how to sort it I'm not sure yet.
 	for place in offices:
 		if checkMed(cur, place):
