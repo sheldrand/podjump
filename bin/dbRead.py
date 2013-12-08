@@ -97,6 +97,7 @@ if __name__ == "__main__":
 	with con:
 		cur = con.cursor()
 		map = buildMap(cur)
+		
 
 		start = raw_input("Where would you like to go? > ")
 		school = raw_input("What school are you in > ")

@@ -1,4 +1,5 @@
 import web
+from web import form
 import dbRead
 
 urls = (
@@ -24,17 +25,27 @@ schools = [
 	('State War Academy', 'State War Academy')
 ]
 
-
+myform = form.Form(
+	form.Textbox('Destination'),
+	form.Dropdown('School', schools),
+	form.Textarea('Offices'),
+	form.Button('Go!', type='submit')
+)
 
 class index(object):
-    def GET(self):
-#		form = web.input(name="Nobody")
-#		greeting = "Hello %s" % form.name
-		
-		form = web.form.Dropdown('Schools', schools)
-		print form
-		return form
+    
+	def GET(self):
+		form = myform()
+#		print form.render()
+		return render.index(form) #form.render()
 
+	def POST(self):
+		form = myform()
+		if not form.validates():
+			return "failure" #render.formtest(form)
+		else:
+			return "A page"
 
 if __name__ == "__main__":
-    app.run()
+	web.internalerror = web.debugerror
+	app.run()
