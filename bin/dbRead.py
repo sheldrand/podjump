@@ -62,10 +62,10 @@ def checkMed (cur, station): #Returns true if a given station has cloning servic
 	else:
 		return False	
 
-def readFile():
+def readFile(fileName='stations'):
 #Reads a file for station names and parses them. Returns a lits of stations
 #	filename = raw_input("The name of your office file > ")
-	corpOffices = open('sta')
+	corpOffices = open(fileName)
 	line = corpOffices.readline()
 	offices = []
 	count = 0
