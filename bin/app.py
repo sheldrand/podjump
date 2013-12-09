@@ -45,6 +45,13 @@ class index(object):
 			return "failure" #render.formtest(form)
 		else:
 			return "A page"
+			
+class routes(object):
+	def GET(self):
+		pass
+	
+	def POST(self):
+		pass
 
 if __name__ == "__main__":
 	web.internalerror = web.debugerror
