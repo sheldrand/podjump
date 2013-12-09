@@ -48,7 +48,7 @@ class pathFinder(object):
 		sID = cur.fetchone()
 		return sID
 		
-	def buildMap (self, cur):
+	def buildMap (self, cur=self.cur):
 	#Builds a networkx graph represting a map we will use for our calculations
 		cur.execute("SELECT solarSystemID FROM mapSolarSystems")
 		map = nx.Graph()
@@ -61,7 +61,7 @@ class pathFinder(object):
 			map.add_edge(i[0], i[1])
 		return map
 
-	def shortestPath (self, cur, map, start, end):
+	def shortestPath (self, cur=self.cur, map=self.map, start, end):
 	#Takes a connection to a mySQL database containing the eve database, a map of the eve universe and 
 	#calculates the shortest path between the start and end systems given as strings
 
@@ -74,7 +74,7 @@ class pathFinder(object):
 		distance = len(path)-1
 		return distance
 			
-	def checkMed (self, cur, station): 
+	def checkMed (self, cur=self.cur, station): 
 	#Returns true if a given station has cloning services returning true all the time right now
 		cur.execute("SELECT operationID FROM staOperationServices WHERE serviceID = '512'") 
 		# gets a list of operationIDs with the cloning service
@@ -83,7 +83,7 @@ class pathFinder(object):
 		cur.execute(sql)
 		stationType = cur.fetchone()
 		if stationType in operationList:
-			print "Station %r has cloning" % station
+#			print "Station %r has cloning" % station
 			return True
 		else:
 			return False	
@@ -105,7 +105,7 @@ class pathFinder(object):
 		print len(offices)
 		return offices
 
-	def schoolStations(self, cur, school):
+	def schoolStations(self, cur=self.cur, school):
 	#returns a list of stations with cloning owned by that school.
 	#Note: does not error check assumes school is picked from pre-populated list
 		sql = "SELECT staStations.stationName FROM staStations INNER JOIN invNames ON " + \
@@ -118,7 +118,8 @@ class pathFinder(object):
 			stationNames.append(pieces[0])
 		return stationNames
 
-if __name__ == "__main__":		
+if __name__ == "__main__":
+	#this probably doesn't work right now.
 	con = mdb.connect('localhost', 'databaseHandler', 'test123', 'evedb')
 	with con:
 		cur = con.cursor()
