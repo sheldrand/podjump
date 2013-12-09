@@ -119,37 +119,45 @@ class pathFinder(object):
 		return stationNames
 
 if __name__ == "__main__":
+	path = pathFinder()
+	
+	
+	start = raw_input("Where would you like to go? > ")
+	
+	offices = path.readFile('stations')
+	
+	closestJumps = path.podJump(start, 'science and trade', offices)
 	#this probably doesn't work right now.
-	con = mdb.connect('localhost', 'databaseHandler', 'test123', 'evedb')
-	with con:
-		cur = con.cursor()
-		map = buildMap(cur)
+#	con = mdb.connect('localhost', 'databaseHandler', 'test123', 'evedb')
+#	with con:
+#		cur = con.cursor()
+#		map = buildMap(cur)
 		
 
-		start = raw_input("Where would you like to go? > ")
-		school = raw_input("What school are you in > ")
+#		start = raw_input("Where would you like to go? > ")
+#		school = raw_input("What school are you in > ")
 		#end = raw_input("where are you going > ")
 		
 		
-		sql = "SELECT solarSystemName from mapSolarSystems where solarSystemName LIKE '" + start + "%'"
-		cur.execute(sql)
-		n = cur.fetchone()
-		print "Heading to %s" % n[0]
+#		sql = "SELECT solarSystemName from mapSolarSystems where solarSystemName LIKE '" + start + "%'"
+#		cur.execute(sql)
+#		n = cur.fetchone()
+#		print "Heading to %s" % n[0]
 		
 		
 		
-		offices = readFile()
-		schools = schoolStations(cur, school) 
-		for i in schools:
-			offices.append(i)
-		clone = [] #Sorted list.
-		for place in offices:
-			if checkMed(cur, place):
-				distance = shortestPath(cur, map, start, place)
-				clone.append((place, distance))
-				print "and is %s Jumps from your destination \n" % distance
-			else:
-				pass
-		clone.sort(key=lambda tup: tup[1])
-		print clone
-	print "end"
+#		offices = readFile()
+#		schools = schoolStations(cur, school) 
+#		for i in schools:
+#			offices.append(i)
+#		clone = [] #Sorted list.
+#		for place in offices:
+#			if checkMed(cur, place):
+#				distance = shortestPath(cur, map, start, place)
+#				clone.append((place, distance))
+#				print "and is %s Jumps from your destination \n" % distance
+#			else:
+#				pass
+#		clone.sort(key=lambda tup: tup[1])
+#		print clone
+#	print "end"
