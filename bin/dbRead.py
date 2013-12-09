@@ -108,8 +108,8 @@ class pathFinder(object):
 	def schoolStations(self, cur, school):
 	#returns a list of stations with cloning owned by that school.
 	#Note: does not error check assumes school is picked from pre-populated list
-		sql = "SELECT staStations.stationName FROM staStations INNER JOIN invNames ON staStations.corporationID=invNames.itemID " + \
-		"WHERE invNames.itemName LIKE '" + school + "%';"
+		sql = "SELECT staStations.stationName FROM staStations INNER JOIN invNames ON " + \
+		"staStations.corporationID=invNames.itemID WHERE invNames.itemName LIKE '" + school + "%';"
 
 		cur.execute(sql)
 		stations = cur.fetchall() #Gets the dump of all station names
