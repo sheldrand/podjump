@@ -74,8 +74,10 @@ class pathFinder(object):
 		distance = len(path)-1
 		return distance
 			
-	def checkMed (self, cur, station): #Returns true if a given station has cloning services returning true all the time right now
-		cur.execute("SELECT operationID FROM staOperationServices WHERE serviceID = '512'") # gets a list of operationIDs with the cloning service
+	def checkMed (self, cur, station): 
+	#Returns true if a given station has cloning services returning true all the time right now
+		cur.execute("SELECT operationID FROM staOperationServices WHERE serviceID = '512'") 
+		# gets a list of operationIDs with the cloning service
 		operationList = cur.fetchall()
 		sql = "SELECT operationID FROM staStations WHERE stationName LIKE '" + station + "%'"
 		cur.execute(sql)
