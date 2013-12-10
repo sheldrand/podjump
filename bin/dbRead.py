@@ -61,7 +61,7 @@ class pathFinder(object):
 			map.add_edge(i[0], i[1])
 		return map
 
-	def shortestPath (self, cur=self.cur, map=self.map, start, end):
+	def shortestPath (self, cur=self.cur, map=self.map, start='jita', end='rens'):
 	#Takes a connection to a mySQL database containing the eve database, a map of the eve universe and 
 	#calculates the shortest path between the start and end systems given as strings
 
