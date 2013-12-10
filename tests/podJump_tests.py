@@ -1,5 +1,5 @@
 from nose.tools import *
-import NAME
+import podJump.py
 
 def setup():
     print "SETUP!"
