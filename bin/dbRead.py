@@ -61,7 +61,7 @@ class pathFinder(object):
 			map.add_edge(i[0], i[1])
 		return map
 
-	def shortestPath (self, cur, map=self.map, start='jita', end='rens'):
+	def shortestPath (self, cur, map, start='jita', end='rens'):
 	#Takes a connection to a mySQL database containing the eve database, a map of the eve universe and 
 	#calculates the shortest path between the start and end systems given as strings
 
@@ -70,7 +70,7 @@ class pathFinder(object):
 	#	sql = "SELECT solarSystemID from mapSolarSystems where solarSystemName = '" + start + "'"
 	#	cur.execute(sql)
 	#	sID = cur.fetchone()
-		path = nx.shortest_path(map, beg[0], dest[0])
+		path = nx.shortest_path(self.map, beg[0], dest[0])
 		distance = len(path)-1
 		return distance
 			
