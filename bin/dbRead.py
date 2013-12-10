@@ -30,10 +30,11 @@ class pathFinder(object):
 	def podJump(self, dest, school, outerOffice):
 	#Main function. Returns a list of offices sorted by distance from destination
 	#List is of tuples (station, num jumps)
+	#Input: destination, a string representing a school and a list of offices (usually generated from readFile
 		offices = outerOffice #A local copy so as to not modify original list
-		schools = self.schoolStations(self.cur, school)
+		schools = self.schoolStations(self.cur, school) # Gets the school stations from the school string
 		for i in schools:
-			offices.append(i)
+			offices.append(i) #Add schools to the offices list
 		clone = [] #Sorted list.
 		for place in offices:
 			if self.checkMed(self.cur, place):
