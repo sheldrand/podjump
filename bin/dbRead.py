@@ -74,7 +74,7 @@ class pathFinder(object):
 		distance = len(path)-1
 		return distance
 			
-	def checkMed (self, cur=self.cur, station): 
+	def checkMed (self, cur=self.cur, station=''): 
 	#Returns true if a given station has cloning services returning true all the time right now
 		cur.execute("SELECT operationID FROM staOperationServices WHERE serviceID = '512'") 
 		# gets a list of operationIDs with the cloning service
@@ -105,7 +105,7 @@ class pathFinder(object):
 		print len(offices)
 		return offices
 
-	def schoolStations(self, cur=self.cur, school):
+	def schoolStations(self, cur=self.cur, school='science and trade'):
 	#returns a list of stations with cloning owned by that school.
 	#Note: does not error check assumes school is picked from pre-populated list
 		sql = "SELECT staStations.stationName FROM staStations INNER JOIN invNames ON " + \
