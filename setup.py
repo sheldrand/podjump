@@ -10,7 +10,7 @@ config = {
     'download_url': 'github.com/sheldrand/podJump',
     'author_email': 'joyfulflyer@gmail.com',
     'version': '0.1',
-    'install_requires': ['nose', 'networkx'],
+    'install_requires': ['nose', 'MySQLdb', 'networkx'],
     'packages': ['podJump'],
     'scripts': [],
     'name': 'podJump'
