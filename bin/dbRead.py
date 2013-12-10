@@ -40,12 +40,12 @@ class pathFinder(object):
 		rows = cur.fetchall()
 		return rows	
 
-	def nameToID (self, name, cur=self.cur):
+	def nameToID (self, name, curs=self.cur):
 	#Takes in a system name and returns the system's ID number
 		index = name.find(' ')#Only the first word (in case of funnyness)
 		sql = "SELECT solarSystemID from mapSolarSystems where solarSystemName LIKE '" + name[:index] + "%'"
-		cur.execute(sql)
-		sID = cur.fetchone()
+		curs.execute(sql)
+		sID = curs.fetchone()
 		return sID
 		
 	def buildMap (self, cur=self.cur):
