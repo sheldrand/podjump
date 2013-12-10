@@ -36,7 +36,7 @@ class pathFinder(object):
 		sql = "SELECT mapSolarSystemJumps.toSolarSystemID FROM mapSolarSystemJumps INNER JOIN " + \
 		"mapSolarSystems ON mapSolarSystemJumps.fromSolarSystemID=mapSolarSystems.solarSystemID " + \
 		"WHERE mapSolarSystems.solarSystemName ='" + location + "'"
-		cur.execute(sql)
+		self.cur.execute(sql)
 		rows = cur.fetchall()
 		return rows	
 
@@ -48,9 +48,9 @@ class pathFinder(object):
 		sID = self.cur.fetchone()
 		return sID
 		
-	def buildMap (self, cur=self.cur):
+	def buildMap (self, cur):
 	#Builds a networkx graph represting a map we will use for our calculations
-		cur.execute("SELECT solarSystemID FROM mapSolarSystems")
+		self.cur.execute("SELECT solarSystemID FROM mapSolarSystems")
 		map = nx.Graph()
 		solarSystems = cur.fetchall()
 		for system in solarSystems:
@@ -74,14 +74,14 @@ class pathFinder(object):
 		distance = len(path)-1
 		return distance
 			
-	def checkMed (self, cur=self.cur, station=''): 
+	def checkMed (self, cur, station): 
 	#Returns true if a given station has cloning services returning true all the time right now
-		cur.execute("SELECT operationID FROM staOperationServices WHERE serviceID = '512'") 
+		self.cur.execute("SELECT operationID FROM staOperationServices WHERE serviceID = '512'") 
 		# gets a list of operationIDs with the cloning service
-		operationList = cur.fetchall()
+		operationList = self.cur.fetchall()
 		sql = "SELECT operationID FROM staStations WHERE stationName LIKE '" + station + "%'"
-		cur.execute(sql)
-		stationType = cur.fetchone()
+		self.cur.execute(sql)
+		stationType = self.cur.fetchone()
 		if stationType in operationList:
 #			print "Station %r has cloning" % station
 			return True
@@ -94,7 +94,7 @@ class pathFinder(object):
 		corpOffices = open(fileName)
 		line = corpOffices.readline()
 		offices = []
-		count = 0
+#		count = 0
 		while line != '':
 			index = line.rfind(' -')
 			if index > 0:
@@ -105,14 +105,14 @@ class pathFinder(object):
 		print len(offices)
 		return offices
 
-	def schoolStations(self, cur=self.cur, school='science and trade'):
+	def schoolStations(self, cur, school='science and trade'):
 	#returns a list of stations with cloning owned by that school.
 	#Note: does not error check assumes school is picked from pre-populated list
 		sql = "SELECT staStations.stationName FROM staStations INNER JOIN invNames ON " + \
 		"staStations.corporationID=invNames.itemID WHERE invNames.itemName LIKE '" + school + "%';"
 
-		cur.execute(sql)
-		stations = cur.fetchall() #Gets the dump of all station names
+		self.cur.execute(sql)
+		stations = self.cur.fetchall() #Gets the dump of all station names
 		stationNames = []
 		for pieces in stations: #Converts to a list of strings
 			stationNames.append(pieces[0])
