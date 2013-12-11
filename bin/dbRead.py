@@ -19,6 +19,7 @@ class pathFinder(object):
 		jumps = cur.fetchall()
 		for i in jumps:
 			map.add_edge(i[0], i[1])
+#		print number of edges and number of nodes for testing
 		return map
 		
 	def __init__(self, server=['localhost', 'databaseHandler', 'test123', 'evedb']):
