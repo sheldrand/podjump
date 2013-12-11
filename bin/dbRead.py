@@ -45,7 +45,14 @@ class pathFinder(object):
 				pass
 		clone.sort(key=lambda tup: tup[1])
 		return clone
-		
+	
+	def __enter__(self):
+		return pathFinder() #creating a new copy of the class
+	
+	def __exit__(self, type, value, traceback)
+		self.con.close() #closing my cursor object
+	pass
+	
 	def getRows (self, cur, location):
 	#depreciated, gets the systems around the location passed in
 		sql = "SELECT mapSolarSystemJumps.toSolarSystemID FROM mapSolarSystemJumps INNER JOIN " + \
