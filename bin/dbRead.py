@@ -49,7 +49,7 @@ class pathFinder(object):
 	def __enter__(self):
 		return pathFinder() #creating a new copy of the class
 	
-	def __exit__(self, type, value, traceback)
+	def __exit__(self, type, value, traceback):
 		self.con.close() #closing my cursor object
 	pass
 	
