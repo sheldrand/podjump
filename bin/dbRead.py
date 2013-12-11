@@ -8,7 +8,7 @@ import networkx as nx
 #Cloning serviceID is 512
 class pathFinder(object):
 
-	def buildMap (self, cur):
+	def __buildMap (self, cur):
 	#Builds a networkx graph represting a map we will use for our calculations
 		self.cur.execute("SELECT solarSystemID FROM mapSolarSystems")
 		map = nx.Graph()
@@ -25,7 +25,7 @@ class pathFinder(object):
 	#Innstantiates the pathFinder. Opens a connection to the database and builds the map.
 		self.con = mdb.connect(server[0], server[1], server[2], server[3])
 		self.cur = self.con.cursor()
-		self.map = self.buildMap(self.cur)
+		self.map = self.__buildMap(self.cur)
 		
 	def podJump(self, dest, school, outerOffice):
 	#Main function. Returns a list of offices sorted by distance from destination
@@ -64,15 +64,11 @@ class pathFinder(object):
 		
 
 
-	def shortestPath (self, cur, map, start='jita', end='rens'):
+	def shortestPath (self, cur, map, start='jita', end='vfk'):
 	#Takes a connection to a mySQL database containing the eve database, a map of the eve universe and 
 	#calculates the shortest path between the start and end systems given as strings
-
 		beg = self.nameToID (self.cur, start)
 		dest = self.nameToID (self.cur, end)
-	#	sql = "SELECT solarSystemID from mapSolarSystems where solarSystemName = '" + start + "'"
-	#	cur.execute(sql)
-	#	sID = cur.fetchone()
 		path = nx.shortest_path(self.map, beg[0], dest[0])
 		distance = len(path)-1
 		return distance
@@ -86,18 +82,15 @@ class pathFinder(object):
 		self.cur.execute(sql)
 		stationType = self.cur.fetchone()
 		if stationType in operationList:
-#			print "Station %r has cloning" % station
 			return True
 		else:
 			return False	
 
 	def readFile(self, fileName='stations'):
 	#Reads a file for station names and parses them. Returns a lits of stations
-	#	filename = raw_input("The name of your office file > ")
 		corpOffices = open(fileName)
 		line = corpOffices.readline()
 		offices = []
-#		count = 0
 		while line != '':
 			index = line.rfind(' -')
 			if index > 0:
@@ -105,7 +98,6 @@ class pathFinder(object):
 			else:
 				pass
 			line = corpOffices.readline()
-		print len(offices)
 		return offices
 
 	def schoolStations(self, cur, school='science and trade'):
@@ -140,5 +132,5 @@ if __name__ == "__main__":
 	print "Heading to %s \n\n" % n[0]	
 	for i in sorted:
 		print "Office at %s is %s jumps from destination \n" % (i[0],i[1])
-#		map = buildMap(cur)
+#		map = __buildMap(cur)
 	print "end"
