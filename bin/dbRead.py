@@ -7,7 +7,7 @@ import networkx as nx
 
 #Cloning serviceID is 512
 class pathFinder(object):
-
+	
 	def __buildMap (self, cur):
 	#Builds a networkx graph represting a map we will use for our calculations
 		self.cur.execute("SELECT solarSystemID FROM mapSolarSystems")
@@ -21,13 +21,13 @@ class pathFinder(object):
 			map.add_edge(i[0], i[1])
 #		print number of edges and number of nodes for testing
 		return map
-		
+	
 	def __init__(self, server=['localhost', 'databaseHandler', 'test123', 'evedb']):
 	#Innstantiates the pathFinder. Opens a connection to the database and builds the map.
 		self.con = mdb.connect(server[0], server[1], server[2], server[3])
 		self.cur = self.con.cursor()
 		self.map = self.__buildMap(self.cur)
-		
+	
 	def podJump(self, dest, school, outerOffice):
 	#Main function. Returns a list of offices sorted by distance from destination
 	#List is of tuples (station, num jumps)
@@ -60,8 +60,8 @@ class pathFinder(object):
 		"WHERE mapSolarSystems.solarSystemName ='" + location + "'"
 		self.cur.execute(sql)
 		rows = cur.fetchall()
-		return rows	
-
+		return rows
+	
 	def nameToID (self, cur, name):
 	#Takes in a system name and returns the system's ID number
 		index = name.find(' ')#Only the first word (in case of funnyness)
@@ -69,21 +69,19 @@ class pathFinder(object):
 		self.cur.execute(sql)
 		sID = self.cur.fetchone()
 		return sID
-		
-
 
 	def shortestPath (self, cur, map, start='jita', end='vfk'):
-	#Takes a connection to a mySQL database containing the eve database, a map of the eve universe and 
+	#Takes a connection to a mySQL database containing the eve database, a map of the eve universe and
 	#calculates the shortest path between the start and end systems given as strings
 		beg = self.nameToID (self.cur, start)
 		dest = self.nameToID (self.cur, end)
 		path = nx.shortest_path(self.map, beg[0], dest[0])
 		distance = len(path)-1
 		return distance
-			
-	def checkMed (self, cur, station): 
+	
+	def checkMed (self, cur, station):
 	#Returns true if a given station has cloning services returning true all the time right now
-		self.cur.execute("SELECT operationID FROM staOperationServices WHERE serviceID = '512'") 
+		self.cur.execute("SELECT operationID FROM staOperationServices WHERE serviceID = '512'")
 		# gets a list of operationIDs with the cloning service
 		operationList = self.cur.fetchall()
 		sql = "SELECT operationID FROM staStations WHERE stationName LIKE '" + station + "%'"
@@ -92,8 +90,8 @@ class pathFinder(object):
 		if stationType in operationList:
 			return True
 		else:
-			return False	
-
+			return False
+	
 	def readFile(self, fileName='stations'):
 	#Reads a file for station names and parses them. Returns a lits of stations
 		corpOffices = open(fileName)
@@ -107,13 +105,13 @@ class pathFinder(object):
 				pass
 			line = corpOffices.readline()
 		return offices
-
+	
 	def schoolStations(self, cur, school='science and trade'):
 	#returns a list of stations with cloning owned by that school.
 	#Note: does not error check assumes school is picked from pre-populated list
 		sql = "SELECT staStations.stationName FROM staStations INNER JOIN invNames ON " + \
 		"staStations.corporationID=invNames.itemID WHERE invNames.itemName LIKE '" + school + "%';"
-
+		
 		self.cur.execute(sql)
 		stations = self.cur.fetchall() #Gets the dump of all station names
 		stationNames = []
@@ -137,7 +135,7 @@ if __name__ == "__main__":
 		cur.execute(sql)
 		n = cur.fetchone()
 	
-	print "Heading to %s \n\n" % n[0]	
+	print "Heading to %s \n\n" % n[0]
 	for i in sorted:
 		print "Office at %s is %s jumps from destination \n" % (i[0],i[1])
 #		map = __buildMap(cur)
