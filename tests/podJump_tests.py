@@ -5,8 +5,8 @@ def test_router():
 	router = pathFinder()
 	assertIsNotNone(router.con)
 	assertIsNotNone(router.map)
-	assertEqual(router.map.number_of_nodes(), 5431)
-	assertEqual(router.map.number_of_edges(), 5) #will currently fail, need to find the actual number of possible jumps
+	assertEqual(router.map.number_of_nodes(), 7929)
+	assertEqual(router.map.number_of_edges(), 7170) 
 
 def setup():
     print "SETUP!"
