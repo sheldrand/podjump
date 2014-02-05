@@ -37,15 +37,17 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+	'podJump',
+	'books',
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+#    'django.contrib.sessions.middleware.SessionMiddleware',
+#    'django.middleware.common.CommonMiddleware',
+#    'django.middleware.csrf.CsrfViewMiddleware',
+#    'django.contrib.auth.middleware.AuthenticationMiddleware',
+#    'django.contrib.messages.middleware.MessageMiddleware',
+#    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 TEMPLATE_DIRS = (
@@ -63,11 +65,11 @@ WSGI_APPLICATION = 'djangoSite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'evedump',
-		'USER': 'evedump',
-		'PASSWORD': 'evedump1234',
-		'HOST':'evetools.info',
-		'PORT':'',
+        'NAME': 'evedb',
+		'USER': 'databaseHandler',
+		'PASSWORD': 'test123',
+		'HOST': '',
+		'PORT': '',
     }
 }
 
