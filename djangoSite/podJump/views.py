@@ -6,11 +6,10 @@ from django.http import HttpResponseRedirect
 def search_form (request):
     if (request.method == 'POST'):
         form = SearchForm(request.POST)
+#        assert False
         if form.is_valid():
             data = form.cleaned_data
             return render(request, 'show.html', {'data':data})
-        else:
-            return render(request, 'show.html', {'data':"bad data"})
     else:
         form = SearchForm()
-	return render(request, 'search_form.html',{'form':form})
+    return render(request, 'search_form.html',{'form':form})
