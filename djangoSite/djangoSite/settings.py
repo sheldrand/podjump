@@ -37,7 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-	'podJump',
+	'podjump',
 	'books',
 )
 
@@ -54,9 +54,9 @@ TEMPLATE_DIRS = (
 	os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),
 )
 
-ROOT_URLCONF = 'djangoSite.urls'
+ROOT_URLCONF = 'djangosite.urls'
 
-WSGI_APPLICATION = 'djangoSite.wsgi.application'
+WSGI_APPLICATION = 'djangosite.wsgi.application'
 
 
 # Database
