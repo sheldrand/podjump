@@ -17,6 +17,6 @@ class SearchForm(forms.Form):
 		('Science & Trade Institute ', 'Science & Trade Institute '),
 		('State War Academy', 'State War Academy'),
 	]
-	destination = forms.CharField(initial='Jita', max_length=50)
+	destination = forms.CharField(initial='Jitas')
 	school = forms.ChoiceField(choices=SCHOOLS)
-	offices = forms.CharField(wudget-firns,Textarea)
+	offices = forms.CharField(widget=forms.Textarea)
