@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from podJump.forms import SearchForm
+from podjump.forms import SearchForm
 from django.http import HttpResponseRedirect
 
 # Create your views here.
