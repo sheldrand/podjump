@@ -9,7 +9,10 @@ def search_form (request):
 #        assert False
         if form.is_valid():
             data = form.cleaned_data
-            return render(request, 'show.html', {'data':data})
+            return show_connections (request, data)
     else:
         form = SearchForm()
     return render(request, 'search_form.html',{'form':form})
+
+def show_connections (request, places):
+    assert False
