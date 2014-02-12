@@ -39,7 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'podjump',
     'books',
-    'eve_db',
+#    'eve_db',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -66,7 +66,7 @@ WSGI_APPLICATION = 'djangosite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'sqlite-latest.sqlite',
+        'NAME': 'D:\VirtualBox\swap\projects\podjump\djangosite\sqlite-latest.sqlite',
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
