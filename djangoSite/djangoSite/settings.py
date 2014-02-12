@@ -37,8 +37,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-	'podjump',
-	'books',
+    'podjump',
+    'books',
+    'eve_db',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -64,12 +65,12 @@ WSGI_APPLICATION = 'djangosite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'evedb',
-		'USER': 'databaseHandler',
-		'PASSWORD': 'test123',
-		'HOST': '',
-		'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'sqlite-latest.sqlite',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     }
 }
 
