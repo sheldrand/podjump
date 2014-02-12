@@ -21,7 +21,6 @@ def show_connections (request):
 	if (request.method == 'POST'):
 		form = SearchForm(request.POST)
 		if form.is_valid():
-			assert False
 			data = form.cleaned_data
 		else:
 			return HttpResponseRedirect('/') #should send home
