@@ -15,4 +15,10 @@ def search_form (request):
     return render(request, 'search_form.html',{'form':form})
 
 def show_connections (request, places):
-    assert False
+    stations = parceplaces(places)
+
+
+def parceplaces (places):
+    #TODO: parse the places passed from the POST call
+    pass
+
