@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from podjump.forms import SearchForm
+from podjump.models import Stastations
 
 
 # Create your views here.
@@ -31,8 +32,14 @@ def show_connections(request):
             return render(request, 'search_form.html', {'form': form})  # renders search with error message
     destination = data.get('destination')
     officelist = data.get('offices')
-    offices = officelist.split("\n")  # splits the offices by newline
-    offices = [i.rstrip('\r') for i in offices]  # strips out the \r at the end of each line (wait, why do I care?)
+    officelist = officelist.split("\n")  # splits the offices by newline
+    offices = []  # Empty list to contain our cleaned office list
+    for i in range(len(officelist)):
+        line = officelist[i]
+        index = line.rfind(' -')
+        if index > 0:
+            offices.append(line[:index])
+    offices.append(school_stations(data.get('school')))  # Now we add the school stations
 
     return render(request, 'show.html', {'data': offices})  # currently just outputting the data
 
@@ -41,3 +48,12 @@ def parceplaces(places):
     #TODO: parse the places passed from the POST call
     pass
 
+
+def school_stations(school):
+    #broken
+    return "stations"
+    schoolstations = []
+    stationinfo = Stastations.objects.filter(corproationid_invnames__itemname__icontains=school)
+    for station in stationinfo:
+        schoolstations.append(station.stationname)
+    return schoolstations
