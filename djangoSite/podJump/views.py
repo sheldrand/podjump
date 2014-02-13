@@ -24,10 +24,17 @@ def show_connections (request):
 			data = form.cleaned_data
 		else:
 			return render(request, 'search_form.html', {'form':form}) #renders search with error message
+	else:
+		#If it isn't POST, redirect to home form
+		return HttpResponseRedirect('/')
 	officelist = data.get('offices')
 	offices = officelist.split("\n") #splits the offices by newline
+	stationnames = []
+	for iterator in offices:
+		#TODO: strip out u and \r before adding it to list of stations
+		stationnames.append(iterator) 
 	
-	return render(request, 'show.html', {'data':offices}) #currently just outputting the data
+	return render(request, 'show.html', {'data':stationnames}) #currently just outputting the data
 	
 
 
