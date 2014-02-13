@@ -16,4 +16,5 @@ urlpatterns = patterns('',
 	url(r'^time/plus/(\d{1,2})+/$', hour_ahead),
 	url(r'^time/$', current_dt),
 	url(r'^$', views.search_form),
+	url(r'^show/$', views.show_connections)
 )
