@@ -23,9 +23,11 @@ def show_connections (request):
 		if form.is_valid():
 			data = form.cleaned_data
 		else:
-			return HttpResponseRedirect('/') #should send home
-#	stations = parceplaces(data)
-	return render(request, 'show.html')
+			return render(request, 'search_form.html', {'form':form}) #renders search with error message
+	officelist = data.get('offices')
+	offices = officelist.split("\n") #splits the offices by newline
+	
+	return render(request, 'show.html', {'data':offices}) #currently just outputting the data
 	
 
 
