@@ -53,6 +53,7 @@ def school_stations(school):
     #broken
     return "stations"
     schoolstations = []
+# I think I'm going to use raw SQL for this
     stationinfo = Stastations.objects.filter(corproationid_invnames__itemname__icontains=school)
     for station in stationinfo:
         schoolstations.append(station.stationname)
