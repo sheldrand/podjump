@@ -27,6 +27,22 @@ with con:
             #		print map.number_of_edges()
             #		print map.number_of_nodes()
             # number of edges and number of nodes for testing
+        id = int(0)
+        build.execute("DROP TABLE IF EXISTS routing_info")
+        build.execute("CREATE TABLE routing_info(Id INT, from_system TEXT, to_system TEXT, num_jumps INT)")
+        for source in solarSystems:
+            print source[1]
+            for dest in solarSystems:
+                if nx.has_path(map, source[0], dest[0]):
+                    jumps = len(nx.shortest_path(map, source[0], dest[0])) - 1
+                    if jumps > 0:
+                        id+=int(1)
+#                    print "INSERT INTO routing_info VALUES ({!s},{!s},{!s},{!s})".format(id, source, destination, jumps)
+                        build.execute("INSERT INTO routing_info VALUES (?,?,?,?)", (id, source, destination, jumps))
+
+
+#                    print "Going from %s to %s and is %s jumps" % (source[1], dest[1], jumps)
+
         print "getting paths"
         data = nx.all_pairs_shortest_path(map)
         print "paths aquired"
@@ -46,7 +62,7 @@ with con:
 #                    print "INSERT INTO routing_info VALUES ({!s},{!s},{!s},{!s})".format(id, source, destination, jumps)
                     build.execute("INSERT INTO routing_info VALUES (?,?,?,?)", (id, source, destination, jumps))
 #                    new.commit()
-#                    print "Going from %s to %s and is %s jumps" % (source, destination, jumps)
+
 #        build.execute("SELECT * FROM routing_info")
 #        rows = build.fetchall()
 #        for row in rows:
